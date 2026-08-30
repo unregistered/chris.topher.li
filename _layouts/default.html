@@ -11,14 +11,30 @@
 <meta name="author" content="{{ site.title }}" />
 <link rel="canonical" href="{{ page.url | absolute_url }}" />
 
+{% comment %}
+  iMessage and Messenger only draw a rich card when there is an og:image, and
+  both require an absolute URL and a raster format -- they ignore the SVG
+  favicon. assets/og.png is 1200x630, regenerated from _og/card.html.
+{% endcomment %}
 <meta property="og:type" content="website" />
-<meta property="og:title" content="{{ page.title | default: site.title }}" />
+<meta property="og:site_name" content="{{ site.title }}" />
+<meta property="og:title" content="{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}" />
 <meta property="og:description" content="{{ page_description }}" />
 <meta property="og:url" content="{{ page.url | absolute_url }}" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="{{ '/assets/og.png' | absolute_url }}" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="{{ site.title }} — {{ site.tagline }}" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ site.title }} — {{ site.tagline }}" />
+<meta name="twitter:description" content="{{ page_description }}" />
+<meta name="twitter:image" content="{{ '/assets/og.png' | absolute_url }}" />
 
 <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}" />
 <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}" />
 </head>
 
 <body>

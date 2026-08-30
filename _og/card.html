@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<style>
+  :root {
+    --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Sitka Text",
+             "Noto Serif", Georgia, Cambria, "Times New Roman", serif;
+    --ink: #191817; --ink-muted: #605c55; --ink-faint: #928d84;
+    --paper: #fcfbf8; --rule: #e6e2d9;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    width: 1200px; height: 630px;
+    background: var(--paper); color: var(--ink);
+    font-family: var(--serif);
+    padding: 96px 104px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  h1 { font-size: 104px; font-weight: 600; letter-spacing: -0.02em; line-height: 1; }
+  .role {
+    margin-top: 34px; font-size: 38px; line-height: 1.42;
+    color: var(--ink-muted); max-width: 20ch;
+  }
+  .foot {
+    margin-top: 56px; padding-top: 28px; border-top: 2px solid var(--rule);
+    font-size: 27px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+</style></head>
+<body>
+  <h1>Chris Li</h1>
+  <p class="role">End-to-end product builder. Human &amp; synthetic data for model training.</p>
+  <p class="foot">chris.topher.li</p>
+</body></html>
