@@ -1,6 +1,6 @@
 ---
 permalink: /index.html
-description: "Chris Li — personal page"
+description: "Chris Li — building human and synthetic datasets for model training. A list of what I've worked on, what I'm reading, and what I've come to believe."
 ---
 
 ## About Me
