@@ -1,0 +1,28 @@
+{% comment %}
+  The year-gutter list under "Work". Content comes from _data/projects.yml,
+  which is stored oldest-first and reversed here so the newest sits on top.
+
+  The first line is up to three parts:  Project · Company · Role
+  All three are optional and any combination works -- the separators are
+  drawn by CSS between adjacent spans, so they collapse on their own when a
+  part is missing. Nothing here needs to know which fields are set.
+{% endcomment %}
+<dl class="timeline">
+  {% for p in site.data.projects reversed %}
+  <dt>{{ p.year }}</dt>
+  <dd>
+    <span class="entry-line">
+      {%- if p.name and p.name != "" -%}
+        <span class="entry-project">{% if p.url and p.url != "" %}<a href="{{ p.url }}">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}</span>
+      {%- endif -%}
+      {%- if p.company and p.company != "" -%}
+        <span class="entry-company">{{ p.company }}</span>
+      {%- endif -%}
+      {%- if p.role and p.role != "" -%}
+        <span class="entry-role">{{ p.role }}</span>
+      {%- endif -%}
+    </span>
+    {% if p.description and p.description != "" %}<span class="entry-desc">{{ p.description | strip_newlines | strip }}</span>{% endif %}
+  </dd>
+  {% endfor %}
+</dl>

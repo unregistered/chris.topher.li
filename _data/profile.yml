@@ -1,0 +1,17 @@
+# ===========================================================================
+# Identity block at the top of the page: name, the line under it, and the
+# contact links below that.
+#
+# `role` prints verbatim, punctuation and all -- write it as a full sentence.
+# ===========================================================================
+
+name: "Chris Li"
+role: "End to End product builder w/ data background. Currently diving deep into human & synthetic data for model training."
+
+# The row of links under the name. Order here is order on the page.
+# Remove them all and the row is omitted entirely.
+links:
+  - label: "GitHub"
+    url: "https://github.com/unregistered"
+  - label: "LinkedIn"
+    url: "https://www.linkedin.com/in/christopher-y-li/"

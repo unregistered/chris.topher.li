@@ -1,0 +1,44 @@
+# ---------------------------------------------------------------------------
+# Site configuration. Everything here is *site* config, not content.
+# Editable prose lives in content/index.md ; structured lists live in _data/*.yml
+# ---------------------------------------------------------------------------
+
+title: "Chris Li"
+# Only used in the <title> tag; keep it short enough to survive a browser tab.
+tagline: "End-to-end product builder"
+url: "https://chris.topher.li"
+baseurl: ""
+
+# Shown in the footer. Bump it when you make a meaningful change.
+last_updated: "August 30, 2026"
+
+include:
+  - CNAME
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .jekyll-cache
+
+# Pages set their own permalink; this is the fallback.
+permalink: /:title.html
+
+# GitHub Pages enables jekyll-titles-from-headings by default, which sets
+# page.title from the first heading in a document. On a one-page site that
+# made every <title> read "About Me · Chris Li".
+titles_from_headings:
+  enabled: false
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Everything in content/ is a full page unless it says otherwise.
+defaults:
+  - scope:
+      path: "content"
+    values:
+      layout: "default"

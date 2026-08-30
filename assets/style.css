@@ -1,0 +1,358 @@
+/* ---------------------------------------------------------------------------
+   chris.topher.li
+
+   One page, one column, no JavaScript.
+
+   The whole design is three decisions:
+     1. A single measure of ~36rem. Nothing is ever wider than comfortable.
+     2. A system serif stack, so there is no webfont request and no layout
+        shift. Charter / Iowan on Apple, Sitka on Windows, Noto on Android,
+        Georgia everywhere else.
+     3. Hierarchy comes from size and space, not from boxes and borders.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --measure:    36rem;
+  --gutter:     1.5rem;
+
+  --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Sitka Text",
+           "Noto Serif", Georgia, Cambria, "Times New Roman", serif;
+
+  --ink:        #191817;
+  --ink-muted:  #605c55;
+  --ink-faint:  #928d84;
+  --paper:      #fcfbf8;
+  --rule:       #e6e2d9;
+  --accent:     #9c3d2a;
+  --accent-dim: #d7b6ad;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink:        #e9e6e0;
+    --ink-muted:  #a7a199;
+    --ink-faint:  #7e7871;
+    --paper:      #171615;
+    --rule:       #322f2b;
+    --accent:     #e0937c;
+    --accent-dim: #6b4a40;
+  }
+}
+
+/* --- reset-ish ----------------------------------------------------------- */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- the page ------------------------------------------------------------ */
+
+.page {
+  max-width: calc(var(--measure) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding: clamp(3rem, 9vw, 6rem) var(--gutter) 4rem;
+}
+
+/* --- masthead ------------------------------------------------------------ */
+
+.masthead { margin-bottom: 2.75rem; }
+
+.name {
+  margin: 0;
+  font-size: clamp(2rem, 1.55rem + 2vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  line-height: 1.08;
+}
+
+.role {
+  margin: 0.55rem 0 0;
+  color: var(--ink-muted);
+  font-size: 1.05rem;
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.95rem;
+}
+
+/* --- headings ------------------------------------------------------------ */
+
+h2 {
+  margin: 3.5rem 0 1.25rem;
+  padding-top: 0.95rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-faint);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+h3 {
+  margin: 2.4rem 0 0.6rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.38;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+
+h3 .num {
+  margin-right: 0.45em;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+}
+
+/* Anchored sections shouldn't land flush against the top of the viewport. */
+h2[id],
+h3[id] { scroll-margin-top: 1.5rem; }
+
+/* --- body copy ----------------------------------------------------------- */
+
+p { margin: 0 0 1.15rem; }
+
+.lede {
+  margin-bottom: 1.35rem;
+  font-size: 1.18em;
+  line-height: 1.56;
+  letter-spacing: -0.004em;
+  text-wrap: pretty;
+}
+
+strong { font-weight: 600; }
+
+ul,
+ol {
+  margin: 0 0 1.15rem;
+  padding-left: 1.2em;
+}
+
+/* Numbers need more hanging room than a bullet, especially past item 9. */
+ol { padding-left: 1.6em; }
+
+/* Lists are denser than prose: tighter leading inside an item, and a gap
+   between items that stays bigger than that leading. Reversing those two
+   makes a wrapped item read as two separate bullets. */
+li {
+  margin-bottom: 0.72rem;
+  line-height: 1.48;
+}
+
+li:last-child { margin-bottom: 0; }
+
+/* Sub-points belong to the bullet above them, so they cluster tight to their
+   parent and to each other. Reserving the airy gap for top-level items is
+   what makes the grouping legible without any extra rules or indentation. */
+li li { margin-bottom: 0.16rem; }
+
+/* The airy gap is only earned by a list that actually groups things. A flat
+   list of one-liners — readings, links — should read as a block instead, so
+   it tightens automatically with no class to remember in the Markdown.
+   Browsers without :has() just keep the roomier spacing. */
+ul:not(:has(ul, ol)) > li,
+ol:not(:has(ul, ol)) > li { margin-bottom: 0.16rem; }
+
+li::marker { color: var(--ink-faint); }
+
+ol > li::marker { font-variant-numeric: tabular-nums; }
+
+/* A nested list lives inside a list item, so it drops the paragraph-sized
+   gap below it and tightens by a step — otherwise each level of depth adds
+   a visual break where it should be adding structure. */
+li > ul,
+li > ol {
+  margin: 0.16rem 0 0;
+}
+
+/* Marker shape carries the depth, so nesting stays legible even when the
+   indent is shallow — which it is, on a phone. Keyed off ancestor <li> count
+   rather than list type, so a ul inside an ol still reads as one level down,
+   and the shapes cycle rather than repeating past level three. */
+ul { list-style: disc; }
+li ul { list-style: circle; }
+li li ul { list-style: square; }
+li li li ul { list-style: disc; }
+
+ol { list-style: decimal; }
+li ol { list-style: lower-alpha; }
+li li ol { list-style: lower-roman; }
+li li li ol { list-style: decimal; }
+
+/* Kramdown wraps items in <p> when a list has blank lines between entries.
+   Without this such a "loose" list spaces out to double the tight one. */
+li > p { margin-bottom: 0.5rem; }
+
+li > p:last-child { margin-bottom: 0; }
+
+/* --- links --------------------------------------------------------------- */
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--accent-dim);
+  text-underline-offset: 0.16em;
+  transition: text-decoration-color 120ms ease;
+}
+
+a:hover,
+a:focus-visible { text-decoration-color: var(--accent); }
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* --- the year-gutter list ------------------------------------------------ */
+
+.timeline {
+  display: grid;
+  grid-template-columns: 3.75rem 1fr;
+  column-gap: 1.75rem;
+  row-gap: 1.5rem;
+  margin: 0 0 1.9rem;
+}
+
+.timeline dt,
+.timeline dd { margin: 0; }
+
+.timeline dt {
+  padding-top: 0.24rem;
+  color: var(--ink-faint);
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* First line of an entry: Project · Company · Role, any of them optional. */
+.entry-line {
+  display: block;
+  line-height: 1.4;
+}
+
+.entry-project { font-weight: 600; }
+
+.entry-company,
+.entry-role {
+  font-size: 0.92rem;
+  font-weight: 400;
+  color: var(--ink-muted);
+}
+
+/* Whatever comes first leads the line, so an entry with only a company still
+   has something to anchor it instead of reading as another body paragraph. */
+.entry-line > span:first-child {
+  font-size: inherit;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* One separator between each pair of parts that actually exists — no rule
+   needs to know which. Swap the content string to change the character. */
+.entry-line > span + span::before {
+  content: "·";
+  margin: 0 0.4em;
+  color: var(--ink-faint);
+}
+
+.entry-desc {
+  display: block;
+  margin-top: 0.15rem;
+  color: var(--ink-muted);
+  font-size: 0.96rem;
+  line-height: 1.58;
+  text-wrap: pretty;
+}
+
+/* On a phone the year gutter costs more width than it earns — stack it. */
+@media (max-width: 32rem) {
+  .timeline { display: block; }
+
+  .timeline dt {
+    padding-top: 0;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+  }
+
+  .timeline dd { margin: 0.1rem 0 1.4rem; }
+}
+
+/* --- footer -------------------------------------------------------------- */
+
+.colophon {
+  margin-top: 4rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-faint);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.colophon p { margin: 0; }
+
+.colophon a {
+  color: inherit;
+  text-decoration-color: var(--rule);
+}
+
+.colophon a:hover,
+.colophon a:focus-visible { color: var(--accent); }
+
+/* --- print --------------------------------------------------------------- */
+
+@media print {
+  :root {
+    --ink:        #000;
+    --ink-muted:  #333;
+    --ink-faint:  #555;
+    --paper:      #fff;
+    --rule:       #ccc;
+    --accent:     #000;
+    --accent-dim: #999;
+  }
+
+  body { font-size: 11pt; line-height: 1.5; }
+
+  .page { max-width: none; padding: 0; }
+
+  h2,
+  h3 { break-after: avoid; }
+
+  .timeline dd { break-inside: avoid; }
+
+  /* Paper has no hover state, so spell the destinations out. */
+  .page a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #555;
+    word-break: break-all;
+  }
+}

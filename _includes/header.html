@@ -1,0 +1,12 @@
+{% assign profile = site.data.profile %}
+<header class="masthead">
+  <h1 class="name">{{ profile.name }}</h1>
+  <p class="role">{{ profile.role }}</p>
+  {% if profile.links and profile.links.size > 0 %}
+  <ul class="contact">
+    {% for link in profile.links %}
+    <li><a href="{{ link.url }}"{% if link.url contains '://' %} rel="me"{% endif %}>{{ link.label }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</header>

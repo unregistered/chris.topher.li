@@ -1,0 +1,70 @@
+# ===========================================================================
+# The "Work" list on the homepage. Kept oldest-first here; the template
+# reverses it so the newest entry renders on top.
+#
+# Each entry renders as:
+#
+#   2013   Project · Company · Role
+#          Description underneath.
+#
+# Fields:
+#   year        required
+#   name        the project; bold, the loudest part of the line
+#   company     optional -- who it was for
+#   role        optional -- what you were there
+#   description optional -- one or two sentences underneath
+#   url         optional -- makes the project name a link
+#
+# name, company and role are all optional and any combination works; the
+# "·" separators collapse on their own around whichever parts you leave out.
+# ===========================================================================
+
+- year: "2011"
+  name: "Bought my first bitcoin"
+
+- year: "2011"
+  name: "Sold all my bitcoin"
+
+- year: "2012"
+  company: "Apple"
+  description: >
+    Building software in a hardware lab.
+
+- year: "2013"
+  name: "Apache Hadoop"
+  url: "https://hadoop.apache.org/"
+  company: "ebay"
+  role: "open source contributor"
+  description: >
+    Contributed congestion control systems for large (at the time) HDFS clusters.
+
+- year: "2015"
+  name: "Seller shipping time prediction"
+  company: "ebay"
+  description: >
+    Predicting how long items take to arrive. Feature engineering + hyperparameter experimentation.
+
+- year: "2017"
+  name: "New product development"
+  company: "ebay"
+  description: >
+    Software engineer on two zero-to-one projects.
+
+- year: "2019"
+  name: "Messenger"
+  company: "Facebook"
+  description: >
+    Making Messenger fast and reliable through data sync.
+
+- year: "2023"
+  name: "Meta AI"
+  company: "Meta"
+  role: "Founding engineer & TL"
+  description: >
+    Launching Meta AI from scratch and early product growth.
+
+- year: "2025"
+  name: "Muse Spark & Muse Image"
+  role: "Data & Acceleration TL"
+  description: >
+    Building human and synthetic datasets w/ researchers & annotators. Acceleration tooling.
