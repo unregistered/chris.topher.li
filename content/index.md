@@ -35,7 +35,7 @@ description: "Chris Li — building human and synthetic datasets for model train
   * Removing is harder to take credit for than adding
   * Local performance review optimization leads to emergent cultural biases
 
-## Readings
+## Selected Readings
 
 ### Work and leadership
 
