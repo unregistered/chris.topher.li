@@ -10,7 +10,7 @@ url: "https://chris.topher.li"
 baseurl: ""
 
 # Shown in the footer. Bump it when you make a meaningful change.
-last_updated: "August 30, 2026"
+last_updated: "August 31, 2026"
 
 include:
   - CNAME

@@ -9,6 +9,10 @@ description: "Chris Li — building human and synthetic datasets for model train
 * Fell in love with evergreen trees in Seattle
 * Will talk about health & fitness anytime
 
+## Work
+
+{% include timeline.html %}
+
 ## Beliefs
 
 * Growth is as much about how to unlearn what used to work as it is about learning new skills
@@ -30,10 +34,6 @@ description: "Chris Li — building human and synthetic datasets for model train
 * Subtraction is systematically underrated for large companies
   * Removing is harder to take credit for than adding
   * Local performance review optimization leads to emergent cultural biases
-
-## Work
-
-{% include timeline.html %}
 
 ## Readings
 
